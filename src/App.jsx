@@ -1,7 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import Auth from "./components/auth";
+import Auth from "./components/Auth";
 import {useEffect} from "react";
-import {checkAuth, logout} from "./store/reducers/authSlice";
+import {checkAuth} from "./store/reducers/authSlice";
+import MainPage from "./pages/MainPage";
 
 const App = () => {
     const isAuth = useSelector(state => state.auth.isAuth)
@@ -12,15 +13,14 @@ const App = () => {
     }, [] )
 
 
+    const handleAddFormVisible = e => {
+        e.preventDefault()
+    }
+
     return (
-        <section>
+        <section className="section section--dark">
             {isAuth ?
-                <div>
-                    <button onClick={e => {
-                        e.preventDefault()
-                        dispatch(logout())
-                    }}>Выход</button>
-                </div> :
+                <MainPage/> :
                 <Auth/>
             }
         </section>
